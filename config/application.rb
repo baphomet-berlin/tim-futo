@@ -22,5 +22,17 @@ module Tim
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.active_record.raise_in_transactional_callbacks = true
+    config.paperclip_defaults = {
+      :storage => :s3,
+      :s3_credentials => {
+        :bucket => 'tim-futo',
+        :access_key_id => 'AKIAISVMWFNXU7RQ6GZA',
+        :secret_access_key => ENV['FUTO_AWS_KEY'],
+      },
+      :url => ':s3_domain_url',
+      :path => "/:class/:attachment/:id_partition/:style/:filename",
+      :compression => { :png => '-o 5 -quiet', :jpeg => '-optimize' }
+    }
   end
 end
